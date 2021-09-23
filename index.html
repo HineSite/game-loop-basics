@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Game Loop Basics</title>
+
+    <link rel="stylesheet" type="text/css" href="./css/car.css"/>
+    <link rel="stylesheet" type="text/css" href="./css/road.css"/>
+
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            box-sizing: border-box;
+        }
+
+        body {
+            height: 100vh;
+            background-color: darkgreen;
+        }
+    </style>
+</head>
+<body>
+    <div id="road">
+        <div id="edge-top"></div>
+        <div id="edge-bottom"></div>
+        <div id="double-yellow"></div>
+
+
+        <div id="car">
+            <div id="roof"></div>
+            <div id="wheel-back"></div>
+            <div id="wheel-front"></div>
+        </div>
+    </div>
+
+    <script type="application/javascript" src="js/jquery.js"></script>
+    <script type="module" src="js/game-loop-basics.js"></script>
+</body>
+</html>

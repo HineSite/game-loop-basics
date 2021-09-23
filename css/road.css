@@ -1,0 +1,37 @@
+#road {
+    width: 100%;
+    height: 100px;
+    position: fixed;
+    top: 30vh;
+    left: 0;
+
+    background-color: lightgray;
+}
+
+#road #edge-top,
+#road #edge-bottom {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    background-color: white;
+}
+
+#road #edge-top {
+    height: 3px;
+    top: 4px;
+}
+
+#road #edge-bottom {
+    height: 3px;
+    bottom: 5px;
+}
+
+#road #double-yellow {
+    position: absolute;
+    width: 100%;
+    height: 5px;
+    left: 0;
+    top: calc(50% - 9px);
+    border-top: yellow solid 2px;
+    border-bottom: yellow solid 2px;
+}
