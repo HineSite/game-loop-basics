@@ -53,9 +53,9 @@ export class GameLoop {
         }
 
         this.testTimestampPrecision((delta) => {
+            this.#minimumPrecision = delta;
             if (delta < this.#targetLoopInterval) {
                 this.#adjustForActualDelay = true;
-                this.#minimumPrecision = delta;
             }
 
             onReady();
@@ -290,6 +290,10 @@ export class GameLoop {
 
     get loopState() {
         return this.#loopState;
+    }
+
+    get minimumPrecision() {
+        return this.#minimumPrecision;
     }
 
     set logger(logger) {
