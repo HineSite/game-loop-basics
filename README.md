@@ -3,6 +3,8 @@ A simple demonstration of the calculations used to move an object across the scr
 The calculations are based on a car moving across the screen at a predefined speed.
 This demonstration also shows the conversion of real world measurements into pixels.
 
+A working example can be found here: https://game-loop-basics.hine.site/
+
 # Explanation
 ### World Conversions
 For this demonstration, the road's length and the car's speed have arbitrarily been set to 300 meters and 15 meters per second, respectively.
