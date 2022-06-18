@@ -58,9 +58,15 @@ import { GameLoop } from './GameLoop.js';
         }
 
         let moveDistance = (carSpeedPixels * delaySeconds);
+        let currentLeft = car.offsetLeft;
         let newLeft = (car.offsetLeft + moveDistance);
 
-        log(GameLoop.LogType.DEBUG, 'moving car', moveDistance + ' pixels to ' + newLeft);
+        if (newLeft !== currentLeft) {
+            log(GameLoop.LogType.DEBUG,
+                'moving car', moveDistance.toFixed(4) + ' pixels to ' + newLeft.toFixed(4)
+                + ' | Delay: ' + delayMilli.toFixed(4) + ' ms'
+            );
+        }
 
         if (newLeft < screenWidth) {
             car.style.left = newLeft + 'px';
