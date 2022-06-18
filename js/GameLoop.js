@@ -151,7 +151,7 @@ export class GameLoop {
     #onRun() {
         let actualLoopDelay = (performance.now() - this.#loopWatch);
         this.#loopWatch = performance.now();
-        console.log('run ' + actualLoopDelay.toFixed(4));
+
         if (this.#loopState ===  GameLoop.LoopState.RUNNING) {
             if (typeof this.#onRunCallback === 'function') {
                 let delay = this.#adjustForActualDelay ? actualLoopDelay : this.#targetLoopInterval;
