@@ -92,10 +92,10 @@ export class GameLoop {
         }
     }
 
-    pause(callback, interval) {
+    pause(callback, fps) {
         if (this.#loopState === GameLoop.LoopState.RUNNING) {
             this.#pausedCallback = callback;
-            this.#pausedInterval = interval;
+            this.#pausedInterval = (1000 / fps);
 
             this.#setLoopState(GameLoop.LoopState.PAUSING);
         }
@@ -113,6 +113,10 @@ export class GameLoop {
         }
     }
 
+    #updateLoopTimer(interval) {
+        this.#loopTimeout = setTimeout(this.#mainLoop, interval);
+    }
+
     #mainLoop = () => {
         switch (this.#loopState) {
             case GameLoop.LoopState.RESUMING: {
@@ -122,7 +126,7 @@ export class GameLoop {
             } // falls through
             case GameLoop.LoopState.RUNNING: {
                 this.#onRun();
-                this.#loopTimeout = setTimeout(this.#mainLoop, this.#targetLoopInterval);
+                this.#updateLoopTimer(this.#targetLoopInterval);
                 break;
             }
 
@@ -138,7 +142,7 @@ export class GameLoop {
             } // falls through
             case GameLoop.LoopState.PAUSED: {
                 this.#onRun();
-                this.#loopTimeout = setTimeout(this.#mainLoop, this.#pausedInterval ?? this.#targetLoopInterval);
+                this.#updateLoopTimer(this.#pausedInterval ?? this.#targetLoopInterval);
                 break;
             }
         }
@@ -147,7 +151,7 @@ export class GameLoop {
     #onRun() {
         let actualLoopDelay = (performance.now() - this.#loopWatch);
         this.#loopWatch = performance.now();
-
+        console.log('run ' + actualLoopDelay.toFixed(4));
         if (this.#loopState ===  GameLoop.LoopState.RUNNING) {
             if (typeof this.#onRunCallback === 'function') {
                 let delay = this.#adjustForActualDelay ? actualLoopDelay : this.#targetLoopInterval;
@@ -230,7 +234,7 @@ export class GameLoop {
         this.#loopIterations = 0;
         this.#loopWatch = performance.now();
         this.#debugWatch = performance.now();
-        this.#loopTimeout = setTimeout(this.#mainLoop, 0);
+        this.#mainLoop(); // Start Main loop.
     }
 
     #onStopping() {
@@ -255,7 +259,6 @@ export class GameLoop {
 
     #onResuming() {
         this.#loopWatch = performance.now();
-        this.#loopTimeout = setTimeout(this.#mainLoop, 0);
     }
 
     testTimestampPrecision(callback) {

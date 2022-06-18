@@ -44,7 +44,7 @@ import { GameLoop } from './GameLoop.js';
                 documentHasFocus = true;
                 gameLoop.resume();
             }
-        }, 600);
+        }, 15);
     }
 
     function onRun (delayMilli, delaySeconds) {
