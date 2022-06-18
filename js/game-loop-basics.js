@@ -48,7 +48,7 @@ import { GameLoop } from './GameLoop.js';
             }, 600);
         }
 
-        function onRun (delay) {
+        function onRun (delayMilli, delaySeconds) {
             if (!document.hasFocus()) {
                 if (documentHasFocus) {
                     pause();
@@ -58,7 +58,7 @@ import { GameLoop } from './GameLoop.js';
                 return;
             }
 
-            let moveDistance = (carSpeedPixels * delay);
+            let moveDistance = (carSpeedPixels * delaySeconds);
             let newLeft = (car.position().left + moveDistance);
 
             log(GameLoop.LogType.DEBUG, 'moving car', moveDistance + ' pixels to ' + newLeft);
